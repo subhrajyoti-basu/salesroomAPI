@@ -26,7 +26,8 @@ export const updateRoom = (req, res) => {
         { _id: req.params.roomId },
         {
             roomData: req.body.canvasData,
-            roomName: req.body.name
+            roomName: req.body.name,
+            brandPhoto: req.body.brandPhoto
         },
         { new: true},
         (err, room) => {
@@ -39,7 +40,7 @@ export const updateRoom = (req, res) => {
 
 export const createRoom = (req, res) => {
     let newRoom = new Room(req.body);
-    newRoom.roomCreatedBy = req.user._id;
+    newRoom.roomCreatedBy = req.user.username;
     newRoom.save((err, room) => {
         if (err) {
             return res.send(err);

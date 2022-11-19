@@ -7,5 +7,6 @@ export const RoomSchema = new mongoose.Schema({
     roomData: {type: Array},
     roomStatus: {type: Number, default: '1'},
     roomCreatedBy: {type: String, require},
+    brandPhoto: {type:String },
     create_Date: {type: Date, default: Date.now}
 })

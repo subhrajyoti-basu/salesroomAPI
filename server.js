@@ -10,9 +10,9 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
-app.use(cors({origin: 'http://localhost:5173'}))
+app.use(cors({origin: process.env.FRONT_URL}))
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
