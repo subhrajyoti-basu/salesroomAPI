@@ -13,6 +13,16 @@ export const loginRequired = (req, res, next) => {
     }
 }
 
+export const userNameExists = (req, res, next) => {
+    User.findOne({username: req.body.username}, (err, user) => {
+        if(user){
+            return res.status(401).json({message: 'Username Already Exist'});
+        }else{
+            next();
+        }
+    })
+}
+
 export const isAdmin = (req, res, next) => {
     if (req.user.role == 'admin') {
         console.log(req.user)

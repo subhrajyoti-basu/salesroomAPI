@@ -1,5 +1,5 @@
-import { createRoom, getAllRoom, getRoom, updateRoom } from "../controllers/roomController";
-import { login, loginRequired, register } from "../controllers/userControllers";
+import { createRoom, deleteRoom, getAllRoom, getRoom, updateRoom } from "../controllers/roomController";
+import { login, loginRequired, register, userNameExists } from "../controllers/userControllers";
 
 const routes = (app) => {
 
@@ -15,14 +15,17 @@ const routes = (app) => {
         .put(loginRequired, updateRoom)
 
         // delete request
-        // .delete(loginRequired, deleteContact);
+    
+    app.route('/delroom/:roomIds')
+        .delete(loginRequired, deleteRoom)    
+
     // registration route
 
     app.route('/allrooms')
         .get(loginRequired, getAllRoom)
 
     app.route('/register')
-        .post(register);
+        .post(userNameExists, register);
 
     // login route
     app.route('/login')

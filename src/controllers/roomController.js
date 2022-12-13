@@ -4,7 +4,7 @@ import { RoomSchema } from "../models/roomModel";
 const Room = mongoose.model('room', RoomSchema);
 
 export const getRoom = (req, res) => {
-    Room.findOne({_id: req.params.roomId}, (err, room) => {
+    Room.findOne({ _id: req.params.roomId }, (err, room) => {
         if (err) {
             return res.send(err);
         }
@@ -13,7 +13,7 @@ export const getRoom = (req, res) => {
 };
 
 export const getAllRoom = (req, res) => {
-    Room.find({roomCreatedBy: req.user._id}, (err, room) => {
+    Room.find({ roomCreatedBy: req.user.username }, (err, room) => {
         if (err) {
             return res.send(err);
         }
@@ -29,7 +29,7 @@ export const updateRoom = (req, res) => {
             roomName: req.body.name,
             brandPhoto: req.body.brandPhoto
         },
-        { new: true},
+        { new: true },
         (err, room) => {
             if (err) {
                 res.send(err);
@@ -48,4 +48,16 @@ export const createRoom = (req, res) => {
 
         return res.json(room);
     });
+}
+
+export const deleteRoom = (req, res) => {
+    // console.log(req.params.roomIds.split(","))
+
+    Room.deleteMany({ _id: { $in: req.params.roomIds.split(",") } },
+        (err, room) => {
+            if (err) {
+                res.send(err);
+            }
+            res.json(room);
+        })
 }

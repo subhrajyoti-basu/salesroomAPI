@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/27d5f8fd-053c-48bf-bc27-a448b69ccfda/AppServices/subscriptions/27d5f8fd-053c-48bf-bc27-a448b69ccfda/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/marketledapi",
+    "appService.deploySubpath": "."
+}
