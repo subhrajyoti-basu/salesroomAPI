@@ -1,5 +1,5 @@
 import express from "express";
-import routes from "./src/routes/roomRoutes";
+import routes from "./routes/roomRoutes";
 import * as dotenv from 'dotenv';
 import DB from './db';
 import bodyParser from 'body-parser';
