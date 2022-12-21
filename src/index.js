@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors({origin: process.env.FRONT_URL}))
+app.use(cors())
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())

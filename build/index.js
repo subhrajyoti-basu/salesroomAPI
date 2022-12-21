@@ -37,7 +37,7 @@ dotenv.config();
 var app = (0, _express2.default)();
 var PORT = process.env.PORT || 8080;
 
-app.use((0, _cors2.default)({ origin: process.env.FRONT_URL }));
+app.use((0, _cors2.default)());
 // bodyparser setup
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
