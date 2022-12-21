@@ -58,7 +58,6 @@ var checkRoomLimit = exports.checkRoomLimit = function checkRoomLimit(req, res, 
 
 var accountStatus = exports.accountStatus = function accountStatus(req, res, next) {
     User.findOne({ _id: req.user._id }, function (err, user) {
-        console.log(user);
         if (err) {
             return res.send(err);
         } else if (user.account_status === 'active') {
