@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _mongoose = require('mongoose');
+var _mongoose = require("mongoose");
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _dotenv = require('dotenv');
+var _dotenv = require("dotenv");
 
 var dotenv = _interopRequireWildcard(_dotenv);
 
@@ -17,7 +17,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 dotenv.config();
-
 var connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true
