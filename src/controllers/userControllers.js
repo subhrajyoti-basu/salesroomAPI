@@ -41,7 +41,9 @@ export const checkRoomLimit = (req,res, next) => {
 
 export const accountStatus = (req, res, next) => {
     User.findOne({_id: req.user._id}, (err, user) => {
-        if(user.account_status == 'active') {
+        if(err){
+            return res.send(err)
+        }else if(user.account_status === 'active') {
             next()
         }else{
             return res.status(401).json({ message: 'inactive user' });
