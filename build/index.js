@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
     }
 });
 
-// routes
+// routes.
 (0, _roomRoutes2.default)(app);
 
 // connect DB
