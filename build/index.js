@@ -37,15 +37,15 @@ dotenv.config();
 var app = (0, _express2.default)();
 var PORT = process.env.PORT || 8080;
 
+// bodyparser setup
+app.use(_bodyParser2.default.urlencoded({ extended: false }));
+app.use(_bodyParser2.default.json());
+
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://app.marketled.online"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-// bodyparser setup
-app.use(_bodyParser2.default.urlencoded({ extended: false }));
-app.use(_bodyParser2.default.json());
-
 // JWT setup
 app.use(function (req, res, next) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {

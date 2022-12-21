@@ -12,15 +12,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://app.marketled.online"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://app.marketled.online"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 // JWT setup
 app.use((req, res, next) => {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
