@@ -37,7 +37,13 @@ dotenv.config();
 var app = (0, _express2.default)();
 var PORT = process.env.PORT || 8080;
 
-app.use((0, _cors2.default)());
+// app.use(cors())
+app.use(function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "https://app.marketled.online");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+});
 // bodyparser setup
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
