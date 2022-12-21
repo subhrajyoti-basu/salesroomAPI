@@ -11,14 +11,12 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-app.options('*', cors())
-app.use(cors({origin: '*'}))
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://app.marketled.online");
-//     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//     next();
-//   })
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://app.marketled.online"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
