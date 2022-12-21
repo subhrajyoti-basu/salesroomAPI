@@ -12,13 +12,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// app.use(cors())
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://app.marketled.online");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    next();
-  })
+app.use(cors({origin: '*'}))
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://app.marketled.online");
+//     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//     next();
+//   })
 // bodyparser setup
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
