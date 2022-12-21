@@ -1,18 +1,19 @@
 import { createRoom, deleteRoom, getAllRoom, getRoom, updateRoom } from "../controllers/roomController";
-import { login, loginRequired, register, userNameExists } from "../controllers/userControllers";
+import { getRoomData } from "../controllers/roomDataController";
+import { accountStatus, checkRoomLimit, login, loginRequired, register, userNameExists } from "../controllers/userControllers";
 
 const routes = (app) => {
 
     // addroom
     app.route('/addroom')
-        .post(loginRequired, createRoom)
+        .post(loginRequired, checkRoomLimit, createRoom)
 
     app.route('/room/:roomId')
         // get specific contact
-        .get(getRoom)
+        .get(getRoomData)
 
         // put request
-        .put(loginRequired, updateRoom)
+        .put(loginRequired, accountStatus, updateRoom)
 
         // delete request
     
@@ -22,7 +23,7 @@ const routes = (app) => {
     // registration route
 
     app.route('/allrooms')
-        .get(loginRequired, getAllRoom)
+        .get(loginRequired, accountStatus, getAllRoom)
 
     app.route('/register')
         .post(userNameExists, register);

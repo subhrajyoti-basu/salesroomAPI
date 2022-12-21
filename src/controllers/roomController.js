@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { RoomSchema } from "../models/roomModel";
+import { createRoomData, deleteRoomData, updateRoomData } from "./roomDataController";
 
 const Room = mongoose.model('room', RoomSchema);
 
@@ -21,20 +22,20 @@ export const getAllRoom = (req, res) => {
     });
 };
 
+
 export const updateRoom = (req, res) => {
     Room.findOneAndUpdate(
         { _id: req.params.roomId },
         {
             roomData: req.body.canvasData,
             roomName: req.body.name,
-            brandPhoto: req.body.brandPhoto
         },
         { new: true },
         (err, room) => {
             if (err) {
                 res.send(err);
             }
-            res.json(room);
+            updateRoomData(req,res)
         })
 }
 
@@ -45,8 +46,9 @@ export const createRoom = (req, res) => {
         if (err) {
             return res.send(err);
         }
-
-        return res.json(room);
+        req._id = room._id;
+        createRoomData(req,res)
+        // return res.json(room);
     });
 }
 
@@ -58,6 +60,7 @@ export const deleteRoom = (req, res) => {
             if (err) {
                 res.send(err);
             }
-            res.json(room);
+            deleteRoomData(req,res)
+            // res.json(room);
         })
 }

@@ -23,6 +23,14 @@ export const UserSchema = new Schema({
     created_date: {
        type: Date,
        default: Date.now 
+    },
+    number_of_rooms: {
+        type: Number,
+        default: 5
+    },
+    account_status: {
+        type: String,
+        default: 'inactive'
     }
 });
 
