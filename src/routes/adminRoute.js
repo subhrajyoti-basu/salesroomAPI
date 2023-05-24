@@ -1,6 +1,9 @@
 import express from "express";
-import { changeAccountStatus, viewUsers } from "../controllers/adminController";
-import { isAdmin, loginRequired } from "../controllers/userControllers";
+import {
+  changeAccountStatus,
+  viewUsers,
+} from "../controllers/adminController.js";
+import { isAdmin, loginRequired } from "../controllers/userControllers.js";
 
 const adminRouter = express.Router();
 

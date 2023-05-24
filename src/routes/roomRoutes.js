@@ -1,36 +1,44 @@
-import { createRoom, deleteRoom, getAllRoom, getRoom, updateRoom } from "../controllers/roomController";
-import { getRoomData } from "../controllers/roomDataController";
-import { accountStatus, checkRoomLimit, login, loginRequired, register, userNameExists } from "../controllers/userControllers";
+import {
+  createRoom,
+  deleteRoom,
+  getAllRoom,
+  getRoom,
+  updateRoom,
+} from "../controllers/roomController.js";
+import { getRoomData } from "../controllers/roomDataController.js";
+import {
+  accountStatus,
+  checkRoomLimit,
+  login,
+  loginRequired,
+  register,
+  userNameExists,
+} from "../controllers/userControllers.js";
 
 const routes = (app) => {
+  // addroom
+  app.route("/addroom").post(loginRequired, checkRoomLimit, createRoom);
 
-    // addroom
-    app.route('/addroom')
-        .post(loginRequired, checkRoomLimit, createRoom)
+  app
+    .route("/room/:roomId")
+    // get specific contact
+    .get(getRoomData)
 
-    app.route('/room/:roomId')
-        // get specific contact
-        .get(getRoomData)
+    // put request
+    .put(loginRequired, accountStatus, updateRoom);
 
-        // put request
-        .put(loginRequired, accountStatus, updateRoom)
+  // delete request
 
-        // delete request
-    
-    app.route('/delroom/:roomIds')
-        .delete(loginRequired, deleteRoom)    
+  app.route("/delroom/:roomIds").delete(loginRequired, deleteRoom);
 
-    // registration route
+  // registration route
 
-    app.route('/allrooms')
-        .get(loginRequired, accountStatus, getAllRoom)
+  app.route("/allrooms").get(loginRequired, accountStatus, getAllRoom);
 
-    app.route('/register')
-        .post(userNameExists, register);
+  app.route("/register").post(userNameExists, register);
 
-    // login route
-    app.route('/login')
-        .post(login);
-}
+  // login route
+  app.route("/login").post(login);
+};
 
 export default routes;

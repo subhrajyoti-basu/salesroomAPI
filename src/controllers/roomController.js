@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import { RoomSchema } from "../models/roomModel";
+import { RoomSchema } from "../models/roomModel.js";
 import {
   createRoomData,
   deleteRoomData,
   updateRoomData,
-} from "./roomDataController";
+} from "./roomDataController.js";
 
 const Room = mongoose.model("room", RoomSchema);
 

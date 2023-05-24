@@ -1,11 +1,11 @@
 import express from "express";
-import routes from "./routes/roomRoutes";
+import routes from "./routes/roomRoutes.js";
 import * as dotenv from "dotenv";
-import DB from "./db";
+import DB from "./db.js";
 import bodyParser from "body-parser";
 import jsonwebtoken from "jsonwebtoken";
 import cors from "cors";
-import adminRouter from "./routes/adminRoute";
+import adminRouter from "./routes/adminRoute.js";
 
 dotenv.config();
 

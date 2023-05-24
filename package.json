@@ -2,11 +2,11 @@
   "name": "salesroomapi",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node ./build/index.js",
-    "dev": "nodemon ./src/index.js --exec babel-node -e js",
-    "build": "babel src -d build"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js --exec babel-node -e js"
   },
   "author": "",
   "license": "ISC",

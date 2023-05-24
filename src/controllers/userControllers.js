@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { UserSchema } from "../models/userModel";
-import { RoomSchema } from "../models/roomModel";
+import { UserSchema } from "../models/userModel.js";
+import { RoomSchema } from "../models/roomModel.js";
 
 const User = mongoose.model("User", UserSchema);
 const Room = mongoose.model("room", RoomSchema);
