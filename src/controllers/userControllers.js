@@ -51,26 +51,29 @@ export const accountStatus = (req, res, next) => {
 
 export const isAdmin = (req, res, next) => {
   if (req.user.role == "admin") {
-    console.log(req.user);
     next();
   } else {
-    return res.status(401).json({ message: "Unauthorized user!" });
+    return res.status(401).json({ message: "User is not admin!" });
   }
 };
 
-export const register = (req, res) => {
-  const newUser = new User(req.body);
-  newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
-  newUser.save((err, user) => {
-    if (err) {
-      return res.status(400).send({
-        message: err,
-      });
-    } else {
-      user.hashPassword = undefined;
-      return res.json(user);
-    }
-  });
+export const register = async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    // check if email id exists
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) throw new Error("account with the email already exists");
+    newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
+    const user = await newUser.save();
+    res.status(202).send({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    res.status(400).send({
+      message: error.message,
+    });
+  }
 };
 
 export const login = (req, res) => {
