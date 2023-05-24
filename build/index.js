@@ -28,6 +28,10 @@ var _cors = require("cors");
 
 var _cors2 = _interopRequireDefault(_cors);
 
+var _adminRoute = require("./routes/adminRoute");
+
+var _adminRoute2 = _interopRequireDefault(_adminRoute);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -41,36 +45,32 @@ var PORT = process.env.PORT || 8080;
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-});
+app.use((0, _cors2.default)({ origin: "*" }));
 // JWT setup
 app.use(function (req, res, next) {
-    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-        _jsonwebtoken2.default.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function (err, decode) {
-            if (err) req.user = undefined;
-            req.user = decode;
-            next();
-        });
-    } else {
-        req.user = undefined;
-        next();
-    }
+  if (req.headers && req.headers.authorization && req.headers.authorization.split(" ")[0] === "JWT") {
+    _jsonwebtoken2.default.verify(req.headers.authorization.split(" ")[1], "RESTFULAPIs", function (err, decode) {
+      if (err) req.user = undefined;
+      req.user = decode;
+      next();
+    });
+  } else {
+    req.user = undefined;
+    next();
+  }
 });
 
 // routes
 (0, _roomRoutes2.default)(app);
+app.use("/admin", _adminRoute2.default);
 
 // connect DB
 (0, _db2.default)();
 
-app.get('/', function (req, res) {
-    res.send('sales room api');
+app.get("/", function (req, res) {
+  res.send("sales room api");
 });
 
 app.listen(PORT, function () {
-    console.log("server is running on PORT " + PORT);
+  console.log("server is running on PORT " + PORT);
 });
